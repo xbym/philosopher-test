@@ -62,10 +62,12 @@ export default function QuestionCard({
           {options.map((option, index) => (
             <motion.div key={index} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button
-                variant={selectedOption === index ? "default" : "outline"}
-                className={`w-full py-4 text-lg justify-start ${
-                  selectedOption === index ? 'bg-black text-white' : 'bg-white text-black border-gray-300'
-                }`}
+                variant="outline"
+                className={`w-full py-4 text-lg justify-start transition-colors duration-200
+                  ${selectedOption === index 
+                    ? 'bg-black text-white border-black' 
+                    : 'bg-white text-black border-gray-300 hover:bg-gray-700 hover:text-white'
+                  }`}
                 onClick={() => handleSelect(index)}
               >
                 {option.text}

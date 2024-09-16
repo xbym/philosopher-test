@@ -1,4 +1,6 @@
+import React from 'react'
 import { Button } from "./ui/button"
+import Logo from './Logo'  // 导入 Logo 组件
 
 interface WelcomePageProps {
   onStart: () => void;
@@ -8,6 +10,7 @@ export default function WelcomePage({ onStart }: WelcomePageProps) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg">
+        <Logo />  {/* 添加 Logo 组件 */}
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-6">
             欢迎参加主义倾向测试
