@@ -11,11 +11,9 @@
 - [x] 配置Tailwind CSS
 
 ### 2. 创建基本组件 [x]
-- [x] 创建Header组件 (.tsx)
-- [x] 创建Footer组件 (.tsx)
+- [x] 创建WelcomePage组件 (.tsx)
 - [x] 创建QuestionCard组件 (.tsx)
 - [x] 创建ResultCard组件 (.tsx)
-- [x] 创建WelcomePage组件 (.tsx)
 
 ### 3. 实现问题逻辑 [x]
 - [x] 创建问题数据结构
@@ -28,10 +26,9 @@
 - [x] 展示最匹配的哲学家结果
 
 ### 5. 样式美化 [x]
-- [x] 使用Tailwind CSS美化Header和Footer
+- [x] 使用Tailwind CSS美化WelcomePage组件
 - [x] 美化QuestionCard组件
 - [x] 美化ResultCard组件
-- [x] 美化WelcomePage组件
 
 ### 6. 优化与测试 [x]
 - [x] 进行代码优化
@@ -44,4 +41,4 @@
 - [x] 进行最终测试
 
 ## 进度追踪
-所有步骤已完成! 🎉 新增了欢迎页功能。
+所有步骤已完成! 🎉 新的UI设计已经整合到项目中。

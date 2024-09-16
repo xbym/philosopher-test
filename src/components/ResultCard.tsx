@@ -1,4 +1,5 @@
-import React from 'react';
+import { Button } from "./ui/button"
+import { Progress } from "./ui/progress"
 
 interface ResultCardProps {
   philosopher: string;
@@ -6,20 +7,44 @@ interface ResultCardProps {
   onRetake: () => void;
 }
 
-const ResultCard: React.FC<ResultCardProps> = ({ philosopher, description, onRetake }) => {
-  return (
-    <div className="bg-white shadow-xl rounded-lg p-4 sm:p-8 max-w-2xl mx-auto mt-4 sm:mt-10 text-center">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4 text-gray-800">你最像的哲学家是:</h2>
-      <h3 className="text-xl sm:text-2xl font-semibold mb-2 sm:mb-4 text-blue-600">{philosopher}</h3>
-      <p className="text-gray-600 mb-6 sm:mb-8 text-base sm:text-lg">{description}</p>
-      <button
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 text-sm sm:text-base"
-        onClick={onRetake}
-      >
-        重新测试
-      </button>
-    </div>
-  );
-};
+export default function ResultCard({ philosopher, description, onRetake }: ResultCardProps) {
+  const results = [
+    { ideology: philosopher, percentage: 100 },
+    // 你可以根据需要添加更多结果
+  ]
 
-export default ResultCard;
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
+      <div className="max-w-2xl w-full space-y-8 p-8 bg-white rounded-xl shadow-lg">
+        <h1 className="text-3xl font-bold text-center text-gray-900 mb-6">
+          您的测试结果
+        </h1>
+        
+        <div className="text-center mb-8">
+          <p className="text-xl text-gray-700">您最倾向的哲学家是</p>
+          <p className="text-3xl font-bold text-blue-600 mt-2">{philosopher}</p>
+        </div>
+        
+        <div className="space-y-6">
+          {results.map((result, index) => (
+            <div key={index} className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="text-lg font-medium text-gray-700">{result.ideology}</span>
+                <span className="text-lg font-bold text-blue-600">{result.percentage}%</span>
+              </div>
+              <Progress value={result.percentage} className="h-4" />
+            </div>
+          ))}
+        </div>
+        
+        <p className="text-gray-600 mt-6">{description}</p>
+        
+        <div className="mt-12 text-center">
+          <Button className="px-8 py-3 text-lg" onClick={onRetake}>
+            重新测试
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
