@@ -1,17 +1,22 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import WelcomePage from './components/WelcomePage';
 import QuestionCard from './components/QuestionCard';
 import ResultCard from './components/ResultCard';
 import { questions, Question } from './data/questions';
 import { philosophers, Philosopher } from './data/philosophers';
 
 function App() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1); // -1 表示欢迎页
   const [answers, setAnswers] = useState<string[]>([]);
   const [showResult, setShowResult] = useState(false);
 
-  const currentQuestion: Question = questions[currentQuestionIndex];
+  const currentQuestion: Question | null = currentQuestionIndex >= 0 ? questions[currentQuestionIndex] : null;
+
+  const handleStart = useCallback(() => {
+    setCurrentQuestionIndex(0);
+  }, []);
 
   const handleSelect = useCallback((optionId: string) => {
     setAnswers(prevAnswers => [...prevAnswers, optionId]);
@@ -26,7 +31,7 @@ function App() {
   }, []);
 
   const handleRetake = useCallback(() => {
-    setCurrentQuestionIndex(0);
+    setCurrentQuestionIndex(-1);
     setAnswers([]);
     setShowResult(false);
   }, []);
@@ -52,12 +57,16 @@ function App() {
     <div className="App flex flex-col min-h-screen bg-gray-100">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
-        {!showResult ? (
-          <QuestionCard
-            question={currentQuestion.text}
-            options={currentQuestion.options}
-            onSelect={handleSelect}
-          />
+        {currentQuestionIndex === -1 ? (
+          <WelcomePage onStart={handleStart} />
+        ) : !showResult ? (
+          currentQuestion && (
+            <QuestionCard
+              question={currentQuestion.text}
+              options={currentQuestion.options}
+              onSelect={handleSelect}
+            />
+          )
         ) : result && (
           <ResultCard
             philosopher={result.name}
